@@ -22,6 +22,8 @@ eCodeOrama provides educators and students with a powerful tool to visualize the
 - **Core Technologies**:
   - HTML5/CSS3/JavaScript (ES6+)
   - Blockly (Google's visual programming library)
+  - Scratch Parser - for parsing SB3 files.
+  - Scratch VM - Official Scratch foundation's library for rendering scratch blocks.
   - JSZip (for extracting SB3 files)
   - SVG/Canvas (for visualizations)
 

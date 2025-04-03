@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>eCodeOrama - SB3 Flow Visualizer</title>
+  <!-- External libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  
+  <script>
+  // Add this before any other scripts
+  window.addEventListener('load', function() {
+    console.log("Document loaded, JSZip available:", typeof JSZip === 'function');
+  });
+  </script>
+  
+  <!-- Scratch blocks -->
+  <script src="scratch-blocks/blockly_compressed_vertical.js"></script>
+  <script src="scratch-blocks/blocks_compressed_vertical.js"></script>
+  <script src="scratch-blocks/msg/messages.js"></script>
+  <script src="scratch-blocks/msg/scratch_msgs.js"></script>
+  
+  <!-- Debug console logger -->
+  <script>
+    console.log("Loading eCodeOrama modules");
+    // Add global error handler
+    window.onerror = function(message, source, line, column, error) {
+      console.error("Global error:", message, "at", source, "line", error);
+      return false;
+    };
+  </script>
+  
+  <!-- Browser compatibility check -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log("Browser check:", {
+      userAgent: navigator.userAgent,
+      jsZipAvailable: typeof JSZip === 'function',
+      blocklyAvailable: typeof Blockly === 'object',
+      promiseSupport: typeof Promise === 'function',
+      asyncAwaitSupport: (function() {
+        try {
+          eval('async function test() {}');
+          return true;
+        } catch(e) {
+          return false;
+        }
+      })(),
+      viewElements: {
+        container: !!document.querySelector('.view-container'),
+        blocksWorkspace: !!document.getElementById('blocks-workspace'),
+        codeOramaContainer: !!document.getElementById('codeOrama-container'),
+        textReportContainer: !!document.getElementById('text-report-container')
+      }
+    });
+  });
+  </script>
+  
+  <!-- Application scripts -->
+  <script src="eventAnalyzer.js"></script>
+  <script src="relationshipAnalyzer.js"></script>
+  <script src="tableGenerator.js"></script>
+  <script src="arrowGenerator.js"></script>
+  <script src="textReporter.js"></script>
+  <script src="codeOrama.js"></script>
+  <script src="viewer.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>eCodeOrama - SB3 Flow Visualizer</h1>
+  <p>Upload an SB3 file to see its flow diagram</p>
+  
+  <div class="upload-section">
+    <input type="file" id="file-input" accept=".sb3">
+    <div id="error-message" style="color: red; display: none;"></div>
+  </div>
+  
+  <div class="view-controls">
+    <button id="blocks-view-btn" class="view-btn active">Blocks View</button>
+    <button id="codeOrama-view-btn" class="view-btn" disabled>CodeOrama View</button>
+    <button id="text-report-btn" class="view-btn" disabled>Text Report</button>
+  </div>
+  
+  <div class="view-container">
+    <div id="blocks-workspace" class="view active"></div>
+    <div id="codeOrama-container" class="view"></div>
+    <div id="text-report-container" class="view">
+      <pre id="text-report">Upload an SB3 file to generate a report.</pre>
+    </div>
+  </div>
+</body>
+</html>

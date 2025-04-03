@@ -1,0 +1,12 @@
+{
+  "name": "scratch-block-renderer",
+  "version": "1.0.0",
+  "description": "Render Scratch blocks from SB3 files",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
